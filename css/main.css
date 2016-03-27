@@ -1,0 +1,13 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+#gameContainer {
+  position: relative;
+  margin-top: 40px;
+  text-align: center;
+}
+
+#gameCanvas {
+  background-color: #000;
+}
