@@ -1,4 +1,3 @@
-
 var asteroids = (function() { // jshint ignore:line
   var game = {
     options: {
