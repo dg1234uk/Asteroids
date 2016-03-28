@@ -1,4 +1,3 @@
-/*global scaleCanvasForHiDPI*/
 
 var asteroids = (function() { // jshint ignore:line
   var game = {
@@ -11,12 +10,9 @@ var asteroids = (function() { // jshint ignore:line
       // Set up Canvas
       game.canvas = document.getElementById('gameCanvas');
       game.ctx = game.canvas.getContext('2d');
-      scaleCanvasForHiDPI(game.ctx);
+      asteroids.scaleCanvasForHiDPI(game.ctx);
 
-
-
-      game.astr = new Asteroid(100, 100, 5, [new Vector(-4,-2), new Vector(-2,-4), new Vector(0,-2), new Vector(2,-4), new Vector(4,-2), new Vector(3,0), new Vector(4,2), new Vector(1,4), new Vector(-2,4), new Vector(-4,2), new Vector(-4,-2)]);
-
+      game.astr = new Asteroid(100, 100, 5, [new asteroids.Vector(-4,-2), new asteroids.Vector(-2,-4), new asteroids.Vector(0,-2), new asteroids.Vector(2,-4), new asteroids.Vector(4,-2), new asteroids.Vector(3,0), new asteroids.Vector(4,2), new asteroids.Vector(1,4), new asteroids.Vector(-2,4), new asteroids.Vector(-4,2), new asteroids.Vector(-4,-2)]);
 
       game.main();
     },
@@ -65,16 +61,6 @@ var asteroids = (function() { // jshint ignore:line
       game.astr.draw();
     },
 
-  };
-
-  var Vector = function(x, y) {
-    this.x = x;
-    this.y = y;
-  };
-
-  Vector.prototype.multiplyScaler = function(scaler) {
-    this.x *= scaler;
-    this.y *= scaler;
   };
 
   var Asteroid = function(x, y, size, vertices) {
