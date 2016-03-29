@@ -11,7 +11,8 @@ var asteroids = (function() { // jshint ignore:line
       game.ctx = game.canvas.getContext('2d');
       asteroids.scaleCanvasForHiDPI(game.ctx);
 
-      game.astr = new Asteroid(100, 100, 5, [new asteroids.Vector(-4,-2), new asteroids.Vector(-2,-4), new asteroids.Vector(0,-2), new asteroids.Vector(2,-4), new asteroids.Vector(4,-2), new asteroids.Vector(3,0), new asteroids.Vector(4,2), new asteroids.Vector(1,4), new asteroids.Vector(-2,4), new asteroids.Vector(-4,2), new asteroids.Vector(-4,-2)]);
+      game.astr = new Asteroid(100, 100, 5, [new asteroids.Vector(-4, -2), new asteroids.Vector(-2, -4), new asteroids.Vector(0, -2), new asteroids.Vector(2, -4), new asteroids.Vector(4, -2), new asteroids.Vector(3, 0), new asteroids.Vector(4, 2), new asteroids.Vector(1, 4), new asteroids.Vector(-2, 4), new asteroids.Vector(-4, 2), new asteroids.Vector(-4, -2)]);
+      game.player = new Player();
 
       game.main();
     },
@@ -58,6 +59,7 @@ var asteroids = (function() { // jshint ignore:line
     render: function() {
       game.ctx.clearRect(0, 0, game.canvas.scaledWidth, game.canvas.scaledHeight);
       game.astr.draw();
+      game.player.draw();
     },
 
   };
@@ -73,6 +75,36 @@ var asteroids = (function() { // jshint ignore:line
   };
 
   Asteroid.prototype.draw = function() {
+    game.ctx.save();
+    game.ctx.beginPath();
+    game.ctx.strokeStyle = '#ffffff';
+
+    game.ctx.moveTo(this.vertices[0].x + this.x, this.vertices[0].y + this.y);
+
+    for (var i = 1; i < this.vertices.length; i++) {
+      game.ctx.lineTo(this.vertices[i].x + this.x, this.vertices[i].y + this.y);
+    }
+
+    game.ctx.closePath();
+
+    game.ctx.stroke();
+    game.ctx.closePath();
+    game.ctx.restore();
+  };
+
+  var Player = function() {
+    this.x = game.canvas.scaledWidth / 2;
+    this.y = game.canvas.scaledHeight / 2;
+
+    this.vertices = [new asteroids.Vector(0, -25), new asteroids.Vector(12, 0), new asteroids.Vector(-12, 0)];
+  };
+
+  Player.prototype.update = function() {
+
+  };
+
+  Player.prototype.draw = function() {
+
     game.ctx.save();
     game.ctx.beginPath();
     game.ctx.strokeStyle = '#ffffff';
